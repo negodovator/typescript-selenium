@@ -18,7 +18,7 @@ capabilities.set("goog:chromeOptions", {
         "--lang=en",
         "disable-infobars",
         "--disable-plugins",
-        //"--headless"
+        "--headless"
     ]
 });
 
