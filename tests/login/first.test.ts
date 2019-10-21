@@ -1,7 +1,7 @@
 import { Builder, WebDriver, Capabilities } from "selenium-webdriver";
 import { LoginPage } from "../../pagesObject/login.po";
 import { CalendarPage } from "../../pagesObject//calendar.po";
-import { App } from "../../pagesObject/config.po";
+import { App, AppWrong } from "../../pagesObject/config.po";
 import { SeleniumUtils } from "../../utils/se.utils";
 
 interface IAssert {
@@ -46,6 +46,15 @@ describe('Login form', function () {
         await assert.equal(await calendarPage.isPage(), true);
     });
 
+    it('Negative test ', async function () {
+        browser.go(App.url);
+        await page.isLoad();
+        await browser.keys(page.email(), AppWrong.user.login);
+        await browser.keys(page.password(), AppWrong.user.password);
+        await browser.click(page.submit());
+        await calendarPage.isLoad();
+        await assert.equal(await calendarPage.isPage(), false);
+    });
 
     after(() => driver && driver.quit());
 })
